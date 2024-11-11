@@ -20,3 +20,7 @@ func NewMessage(role, messageType, content string) Message {
 		messageContent: NewMessageContent(messageType, content),
 	}
 }
+
+func (m *message) GetMessageContent() string {
+	return m.messageContent.GetContent()
+}
