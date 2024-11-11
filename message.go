@@ -1,21 +1,17 @@
 package gopenai
 
-type message struct {
+type Message struct {
 	role           string          `json:"role"`
 	messageContent *messageContent `json:"message_content"`
 }
 
-type Message interface {
-	GetMessageContent() string
-}
-
 func NewMessage(role, messageType, content string) Message {
-	return &message{
+	return Message{
 		role:           role,
 		messageContent: NewMessageContent(messageType, content),
 	}
 }
 
-func (m *message) GetMessageContent() string {
+func (m *Message) GetMessageContent() string {
 	return m.messageContent.GetContent()
 }
