@@ -2,7 +2,7 @@ package gopenai
 
 type message struct {
 	role           string         `json:"role"`
-	messageContent MessageContent `json:"messageContent"`
+	messageContent MessageContent `json:"message_content"`
 }
 
 type Message interface{}
