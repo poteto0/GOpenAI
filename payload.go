@@ -19,12 +19,11 @@ var DefaultPayloadSetting = PayloadSetting{
 
 type payload struct {
 	Setting  PayloadSetting `json:"setting"`
-	Messages []Message      `json:"messages"`
+	Messages []*message     `json:"messages"`
 }
 
 type Payload interface {
-	SetMessage(messages ...Message)
-	GetMessages() []Message
+	GetMessages() []*message
 	AppendMessage(messages ...Message)
 	ToPayloadBytes() ([]byte, error)
 }
@@ -35,16 +34,17 @@ func NewPayload(setting PayloadSetting) Payload {
 	}
 }
 
-func (p *payload) SetMessage(messages ...Message) {
-	p.Messages = messages
-}
-
-func (p *payload) GetMessages() []Message {
+func (p *payload) GetMessages() []*message {
 	return p.Messages
 }
 
 func (p *payload) AppendMessage(messages ...Message) {
-	p.Messages = append(p.Messages, messages...)
+	if len(messages) == 0 {
+		return
+	}
+	for _, msg := range messages {
+		p.Messages = append(p.Messages, msg.(*message))
+	}
 }
 
 func (p *payload) ToPayloadBytes() ([]byte, error) {

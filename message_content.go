@@ -5,11 +5,7 @@ type messageContent struct {
 	content     string `json:"content"`
 }
 
-type MessageContent interface {
-	GetContent() string
-}
-
-func NewMessageContent(messageType, content string) MessageContent {
+func NewMessageContent(messageType, content string) *messageContent {
 	return &messageContent{
 		messageType: messageType,
 		content:     content,
