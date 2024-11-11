@@ -5,7 +5,9 @@ type message struct {
 	messageContent MessageContent `json:"message_content"`
 }
 
-type Message interface{}
+type Message interface {
+	GetMessageContent() string
+}
 
 func NewMessageByMessageContent(role string, messageContent MessageContent) Message {
 	return &message{
